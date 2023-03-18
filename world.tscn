@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://rkuwlq0um8sw"]
+
+[ext_resource type="PackedScene" uid="uid://cx3mt53b3n6dr" path="res://Tilemap.tscn" id="1_drc1s"]
+[ext_resource type="Script" path="res://world.gd" id="1_r7m11"]
+[ext_resource type="PackedScene" uid="uid://bl6d0jydxesr0" path="res://mole.tscn" id="2_hh43u"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_r7m11")
+
+[node name="TileMap" parent="." instance=ExtResource("1_drc1s")]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Mole" parent="." instance=ExtResource("2_hh43u")]
+position = Vector2(58, 43)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
