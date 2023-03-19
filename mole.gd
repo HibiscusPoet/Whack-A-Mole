@@ -3,6 +3,7 @@ extends Area2D
 @onready var sprite2D = $MoleSprite
 
 var mouse_inside_area = false
+var mole_escaped = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,7 +11,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_just_released("ui_click") and mouse_inside_area:
+	if Input.is_action_just_released("ui_click") and mouse_inside_area and mole_escaped == false:
 		print("Mole caught!")
 		queue_free()
 
@@ -23,3 +24,4 @@ func _on_mouse_exited():
 func _on_timer_timeout():
 	sprite2D.set_region_rect(Rect2(0, 16, 16, 16))
 	print("Mole escaped!")
+	mole_escaped = true

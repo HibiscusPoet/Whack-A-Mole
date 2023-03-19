@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://rkuwlq0um8sw"]
+[gd_scene load_steps=5 format=3 uid="uid://rkuwlq0um8sw"]
 
 [ext_resource type="PackedScene" uid="uid://cx3mt53b3n6dr" path="res://Tilemap.tscn" id="1_drc1s"]
 [ext_resource type="Script" path="res://world.gd" id="1_r7m11"]
 [ext_resource type="PackedScene" uid="uid://bl6d0jydxesr0" path="res://mole.tscn" id="2_hh43u"]
+[ext_resource type="PackedScene" uid="uid://dakdpc0td67w3" path="res://ui.tscn" id="4_811a2"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_r7m11")
@@ -15,4 +16,16 @@ autostart = true
 [node name="Mole" parent="." instance=ExtResource("2_hh43u")]
 position = Vector2(58, 43)
 
+[node name="DifficultyTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("4_811a2")]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]
