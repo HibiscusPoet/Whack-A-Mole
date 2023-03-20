@@ -1,8 +1,16 @@
 extends Node2D
 
-var moleScene = preload("res://mole.tscn")
+@onready var moleScene = preload("res://mole.tscn")
+@onready var healthBar = get_node("CanvasLayer/HealthBar")
+@onready var scoreText = get_node("CanvasLayer/UI/CenterContainer/VBoxContainer/Label")
+
 var padding = 10
 var molePerSecond = 1
+var score = 0
+var maxHealth = 10
+#var health = 10
+var isAlive = true
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,7 +19,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
 
 func _on_timer_timeout():
 	for n in molePerSecond:
@@ -33,3 +40,16 @@ func randomizePosition() -> Vector2:
 
 func _on_difficulty_timer_timeout():
 	molePerSecond += 1
+
+
+func _on_mole_mole_caught():
+	if isAlive:
+		score += 1
+		print("Score is currently at: " + str(score))
+
+
+func _on_mole_mole_not_caught():
+	if isAlive:
+		healthBar.health -= 1
+		healthBar.value -= 1
+		print("Health is: " + str(healthBar.health))

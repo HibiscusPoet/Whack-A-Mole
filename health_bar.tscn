@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dotununqb271g"]
+
+[node name="HealthBar" type="ProgressBar"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 6.0
+grow_horizontal = 2
+show_percentage = false

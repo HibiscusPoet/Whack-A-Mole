@@ -1,5 +1,8 @@
 extends Area2D
 
+signal mole_caught
+signal mole_not_caught 
+
 @onready var sprite2D = $MoleSprite
 
 var mouse_inside_area = false
@@ -13,6 +16,7 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_released("ui_click") and mouse_inside_area and mole_escaped == false:
 		print("Mole caught!")
+		mole_caught.emit()
 		queue_free()
 
 func _on_mouse_entered():
@@ -24,4 +28,5 @@ func _on_mouse_exited():
 func _on_timer_timeout():
 	sprite2D.set_region_rect(Rect2(0, 16, 16, 16))
 	print("Mole escaped!")
+	mole_not_caught.emit()
 	mole_escaped = true
