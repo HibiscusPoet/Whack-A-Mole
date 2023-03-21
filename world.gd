@@ -3,6 +3,7 @@ extends Node2D
 @onready var moleScene = preload("res://mole.tscn")
 @onready var healthBar = get_node("CanvasLayer/HealthBar")
 @onready var scoreText = get_node("CanvasLayer/UI/CenterContainer/VBoxContainer/Label")
+@onready var UINode = get_node("CanvasLayer/UI")
 
 var padding = 10
 var molePerSecond = 1
@@ -53,3 +54,5 @@ func _on_mole_mole_not_caught():
 		healthBar.health -= 1
 		healthBar.value -= 1
 		print("Health is: " + str(healthBar.health))
+		if healthBar.health == 0:
+			UINode.visible = true
