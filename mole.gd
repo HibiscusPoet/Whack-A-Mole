@@ -4,13 +4,19 @@ signal mole_caught
 signal mole_not_caught 
 
 @onready var sprite2D = $MoleSprite
+@onready var timer = $Timer
+
+var worldNode
 
 var mouse_inside_area = false
 var mole_escaped = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	worldNode = get_node("/root/World")
+	worldNode.timeout.connect(_on_timer_timeout())
+	#timer.timeout.connect(_on_timer_timeout)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

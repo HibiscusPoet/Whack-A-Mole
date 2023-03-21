@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://rkuwlq0um8sw"]
+[gd_scene load_steps=7 format=3 uid="uid://rkuwlq0um8sw"]
 
 [ext_resource type="PackedScene" uid="uid://cx3mt53b3n6dr" path="res://Tilemap.tscn" id="1_drc1s"]
 [ext_resource type="Script" path="res://world.gd" id="1_r7m11"]
-[ext_resource type="PackedScene" uid="uid://bl6d0jydxesr0" path="res://mole.tscn" id="2_hh43u"]
 [ext_resource type="PackedScene" uid="uid://dakdpc0td67w3" path="res://ui.tscn" id="4_811a2"]
 [ext_resource type="PackedScene" uid="uid://dotununqb271g" path="res://health_bar.tscn" id="5_8j2oa"]
 [ext_resource type="Theme" uid="uid://bfrqy26c23rps" path="res://healthbar_theme.tres" id="6_lpitd"]
@@ -16,9 +15,6 @@ script = ExtResource("1_r7m11")
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="Mole" parent="." instance=ExtResource("2_hh43u")]
-position = Vector2(58, 43)
-
 [node name="DifficultyTimer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
@@ -26,6 +22,7 @@ autostart = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("4_811a2")]
+visible = false
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
@@ -38,6 +35,4 @@ value = 10.0
 script = ExtResource("6_uvicf")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="mole_caught" from="Mole" to="." method="_on_mole_mole_caught"]
-[connection signal="mole_not_caught" from="Mole" to="." method="_on_mole_mole_not_caught"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]
