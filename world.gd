@@ -4,6 +4,8 @@ extends Node2D
 @onready var healthBar = get_node("CanvasLayer/HealthBar")
 @onready var scoreText = get_node("CanvasLayer/UI/CenterContainer/VBoxContainer/Label")
 @onready var UINode = get_node("CanvasLayer/UI")
+@onready var UILabel = get_node("CanvasLayer/UI/CenterContainer/VBoxContainer/Label")
+@onready var audioStreamPlayer = get_node("AudioStreamPlayer")
 
 var padding = 10
 var molePerSecond = 1
@@ -22,11 +24,12 @@ func _process(delta):
 	pass
 
 func _on_timer_timeout():
-	for n in molePerSecond:
-		var mole = moleScene.instantiate()
-		add_child(mole)
-		mole.position = randomizePosition()
-	print("tick, molePerSecond is: " + str(molePerSecond))
+	if isAlive:
+		for n in molePerSecond:
+			var mole = moleScene.instantiate()
+			add_child(mole)
+			mole.position = randomizePosition()
+		print("tick, molePerSecond is: " + str(molePerSecond))
 
 func randomizePosition() -> Vector2:
 	var xPos = randi_range(padding, 320 - padding)
@@ -46,6 +49,7 @@ func _on_difficulty_timer_timeout():
 func _on_mole_mole_caught():
 	if isAlive:
 		score += 1
+		audioStreamPlayer.play()
 		print("Score is currently at: " + str(score))
 
 
@@ -55,4 +59,6 @@ func _on_mole_mole_not_caught():
 		healthBar.value -= 1
 		print("Health is: " + str(healthBar.health))
 		if healthBar.health == 0:
+			isAlive = false
+			UILabel.text = "You whacked " + str(score) + " moles!"
 			UINode.visible = true

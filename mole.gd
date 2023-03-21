@@ -15,6 +15,7 @@ var mole_escaped = false
 func _ready():
 	worldNode = get_node("/root/World")
 	mole_not_caught.connect(worldNode._on_mole_mole_not_caught)
+	mole_caught.connect(worldNode._on_mole_mole_caught)
 	#worldNode.timeout.connect(_on_timer_timeout())
 	#timer.timeout.connect(_on_timer_timeout)
 	

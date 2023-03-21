@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://rkuwlq0um8sw"]
+[gd_scene load_steps=8 format=3 uid="uid://rkuwlq0um8sw"]
 
 [ext_resource type="PackedScene" uid="uid://cx3mt53b3n6dr" path="res://Tilemap.tscn" id="1_drc1s"]
 [ext_resource type="Script" path="res://world.gd" id="1_r7m11"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dotununqb271g" path="res://health_bar.tscn" id="5_8j2oa"]
 [ext_resource type="Theme" uid="uid://bfrqy26c23rps" path="res://healthbar_theme.tres" id="6_lpitd"]
 [ext_resource type="Script" path="res://health_bar.gd" id="6_uvicf"]
+[ext_resource type="AudioStream" uid="uid://cv3m1yafweaeh" path="res://question.wav" id="7_wbsfn"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_r7m11")
@@ -33,6 +34,9 @@ max_value = 10.0
 step = 1.0
 value = 10.0
 script = ExtResource("6_uvicf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_wbsfn")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]

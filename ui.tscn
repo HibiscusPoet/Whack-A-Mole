@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dakdpc0td67w3"]
+[gd_scene load_steps=4 format=3 uid="uid://dakdpc0td67w3"]
 
 [ext_resource type="FontFile" uid="uid://dplqe6hqgct1x" path="res://04B_30__.TTF" id="1_7ct1h"]
 [ext_resource type="FontFile" uid="uid://dm7lepktqh1vq" path="res://Minecraft.ttf" id="2_j7bc3"]
+[ext_resource type="Script" path="res://ResetButton.gd" id="3_7vpoc"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -35,8 +36,12 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.105882, 0.168627, 1)
 theme_override_fonts/font = ExtResource("2_j7bc3")
 text = "You whacked x moles!"
+horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_7ct1h")
 text = "again"
+script = ExtResource("3_7vpoc")
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="CenterContainer/VBoxContainer/Button" method="_on_pressed"]
