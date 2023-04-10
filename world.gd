@@ -1,6 +1,9 @@
 extends Node2D
 
-@onready var moleScene = preload("res://mole.tscn")
+const moleScene = preload("res://mole.tscn")
+const evilMoleScene = preload("res://evil_mole.tscn")
+const heartScene = preload("res://heart.tscn")
+
 @onready var healthBar = get_node("CanvasLayer/HealthBar")
 @onready var scoreText = get_node("CanvasLayer/UI/CenterContainer/VBoxContainer/Label")
 @onready var UINode = get_node("CanvasLayer/UI")
@@ -14,10 +17,15 @@ var maxHealth = 10
 #var health = 10
 var isAlive = true
 
+var arraySize
+#var evilMole = PickUps.new()
+
+var moleType = [moleScene, evilMoleScene, heartScene]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	arraySize = moleType.size()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -26,9 +34,12 @@ func _process(delta):
 func _on_timer_timeout():
 	if isAlive:
 		for n in molePerSecond:
-			var mole = moleScene.instantiate()
-			add_child(mole)
-			mole.position = randomizePosition()
+			var item = moleType[randi() % arraySize].instantiate()
+			add_child(item)
+			item.position = randomizePosition()
+#			var mole = moleScene.instantiate()
+#			add_child(mole)
+#			mole.position = randomizePosition()
 		print("tick, molePerSecond is: " + str(molePerSecond))
 
 func randomizePosition() -> Vector2:

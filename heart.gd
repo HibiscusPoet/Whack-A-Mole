@@ -1,11 +1,10 @@
 extends PickUps
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connnect_Nodes()
-	pointValue = 1
+	pointValue = -3
+	leavesHoles = false
 	#worldNode.timeout.connect(_on_timer_timeout())
 	#timer.timeout.connect(_on_timer_timeout)
 	

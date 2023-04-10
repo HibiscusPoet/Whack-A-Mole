@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://s71lvcva3k2q"]
+
+[ext_resource type="Script" path="res://evil_mole.gd" id="1_r0b50"]
+[ext_resource type="Texture2D" uid="uid://2ov2xqyunepg" path="res://moleevil.png" id="2_7w4kw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d038j"]
+size = Vector2(14, 12)
+
+[node name="EvilMole" type="Area2D"]
+script = ExtResource("1_r0b50")
+
+[node name="MoleSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_7w4kw")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_d038j")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered" flags=18]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited" flags=18]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout" flags=18]

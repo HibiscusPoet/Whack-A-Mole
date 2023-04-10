@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bevvhex8yyu8p"]
+
+[ext_resource type="Texture2D" uid="uid://cm5fkcvycy6xp" path="res://Molehill.png" id="1_byj8c"]
+
+[node name="Molehill" type="Sprite2D"]
+texture = ExtResource("1_byj8c")
