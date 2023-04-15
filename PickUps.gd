@@ -2,8 +2,8 @@ extends Node
 
 class_name PickUps
 
-signal mole_caught
-signal mole_not_caught
+signal mole_caught(mole)
+signal mole_not_caught(mole)
 
 #@onready var healthBar = get_node("CanvasLayer/HealthBar")
 @onready var molehill = load("res://molehill.tscn")
@@ -30,10 +30,10 @@ func escape_mole():
 	if leavesHoles == true:
 		#sprite2D.texture = load("res://Molehill.png")
 		var hill = molehill.instantiate()
-		add_child(hill)
-		hill.position = sprite2D.position
+		get_tree().root.add_child(hill)
+		hill.global_position = sprite2D.global_position
 	print("Mole escaped!")
-	mole_not_caught.emit()
+	mole_not_caught.emit(self)
 	mole_escaped = true
 	#queue_free()
 	

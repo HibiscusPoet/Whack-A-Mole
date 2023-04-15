@@ -57,19 +57,29 @@ func _on_difficulty_timer_timeout():
 	molePerSecond += 1
 
 
-func _on_mole_mole_caught():
+func _on_mole_mole_caught(mole):
 	if isAlive:
-		score += 1
+		if mole is Heart:
+			healthBar.health += mole.pointValue
+			healthBar.value += mole.pointValue
+		if mole is EvilMole || mole is Mole:
+			score += mole.pointValue
+#		score += damage
 		audioStreamPlayer.play()
 		print("Score is currently at: " + str(score))
 
 
-func _on_mole_mole_not_caught():
+func _on_mole_mole_not_caught(mole):
 	if isAlive:
-		healthBar.health -= 1
-		healthBar.value -= 1
+		
+		if mole is EvilMole || mole is Mole:
+			healthBar.health -= mole.pointValue
+			healthBar.value -= mole.pointValue
+		
+#		healthBar.health -= damage
+#		healthBar.value -= damage
 		print("Health is: " + str(healthBar.health))
-		if healthBar.health == 0:
+		if healthBar.health <= 0:
 			isAlive = false
 			UILabel.text = "You whacked " + str(score) + " moles!"
 			UINode.visible = true

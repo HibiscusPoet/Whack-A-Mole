@@ -1,6 +1,6 @@
 extends PickUps
 
-
+class_name Mole
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,7 +13,7 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_released("ui_click") and mouse_inside_area and mole_escaped == false:
 		print("Mole caught!")
-		mole_caught.emit()
+		mole_caught.emit(self)
 		queue_free()
 
 func _on_mouse_entered():
